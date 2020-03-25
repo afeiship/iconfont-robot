@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build": "ruby src/app.rb",
-    "check": "ruby src/check.rb"
+    "check": "ruby src/checker.rb"
   },
   "license": "MIT",
   "publishConfig": {

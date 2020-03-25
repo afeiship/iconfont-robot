@@ -1,15 +1,6 @@
-require "json"
-require "nx"
-require "nx-http"
-require "tty-spinner"
-require_relative "./iconfont.rb"
+require_relative "./boot.rb"
 
-include Nx
-
-file = File.read "./config.json"
-CONFIG = JSON.parse(file)
-
-class Check
+class Checker
   def initialize
     @iconfont = Iconfont.new
     update_if_changed
@@ -38,4 +29,4 @@ class Check
   end
 end
 
-Check.start
+Checker.start

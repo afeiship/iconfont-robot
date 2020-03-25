@@ -1,13 +1,4 @@
-require "json"
-require "nx"
-require "nx-http"
-require "tty-spinner"
-require_relative "./iconfont.rb"
-
-include Nx
-
-file = File.read "./config.json"
-CONFIG = JSON.parse(file)
+require_relative "./boot.rb"
 
 class App
   def self.start
