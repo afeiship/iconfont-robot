@@ -1,5 +1,6 @@
 require "json"
 require "nx-http"
+require "tty-spinner"
 require_relative "./iconfont.rb"
 
 include Nx
@@ -12,6 +13,13 @@ class App
   end
 
   def initialize
+    spinner = TTY::Spinner.new("[:spinner] Update ...", format: :spin)
+    spinner.auto_spin
+    start
+    spinner.success
+  end
+
+  def start
     clean
     write
     export
@@ -33,12 +41,12 @@ class App
     current_time = Time.now.strftime("%Y-%m-%d %H:%M:%S")
     js_header = [
       "/* Update time: #{current_time}*/",
-      "/* Update By: abcft.bi team */",
+      "/* Update By: abcft.wfe team */",
     ].join "\n"
 
     # mv dist file
     system "rm -rf ./dist/font*"
-    system "cd dist && unzip download.zip"
+    system "cd dist && unzip -q download.zip"
     system "cp ./dist/font*/iconfont.js #{filename}"
 
     # add comments for latest update time
@@ -47,3 +55,5 @@ class App
     File.write(filename, file_content)
   end
 end
+
+App.start
