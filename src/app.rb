@@ -1,11 +1,13 @@
 require "json"
+require "nx"
 require "nx-http"
 require "tty-spinner"
 require_relative "./iconfont.rb"
 
 include Nx
 
-CONFIG = JSON.parse(File.read "./config.json")
+file = File.read "./config.json"
+CONFIG = JSON.parse(file)
 
 class App
   def self.start
@@ -13,6 +15,7 @@ class App
   end
 
   def initialize
+    @iconfont = Iconfont.new
     spinner = TTY::Spinner.new("[:spinner] Update ...", format: :spin)
     spinner.auto_spin
     start
@@ -22,18 +25,26 @@ class App
   def start
     clean
     write
+    save
     export
   end
+
+  private
 
   def clean
     system "rm -rf dist/*"
   end
 
   def write
-    res = Iconfont.new(CONFIG["cookie"], CONFIG["url"]).download
+    res = @iconfont.download
     File.open("./dist/download.zip", "wb") do |file|
       file.write(res.body)
     end
+  end
+
+  def save
+    detail = @iconfont.detail
+    @iconfont.update detail.get("data.project.updated_at")
   end
 
   def export

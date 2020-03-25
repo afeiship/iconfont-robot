@@ -7,6 +7,10 @@
     "name": "afeiship",
     "email": "1290657123@qq.com"
   },
+  "scripts": {
+    "build": "ruby src/app.rb",
+    "check": "ruby src/check.rb"
+  },
   "license": "MIT",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
