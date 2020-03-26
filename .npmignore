@@ -10,3 +10,14 @@ gulpfile.js
 
 .editorconfig
 .prettierrc
+
+
+assets
+config
+log
+config.json
+Gemfile
+
+font_*
+*.zip
+log/*.log
