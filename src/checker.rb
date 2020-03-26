@@ -7,6 +7,7 @@ class Checker
   end
 
   def sync_to_git
+    system "git pull"
     system "npm run build"
     system "git add --all && git commit -m 'feat: submit by robot' && git push"
     system "npm version patch && git push --tags"
