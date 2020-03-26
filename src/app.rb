@@ -7,6 +7,7 @@ class App
 
   def initialize
     @iconfont = Iconfont.new
+    @pkg = JSON.parse(File.read "./package.json")
     spinner = TTY::Spinner.new("[:spinner] Update ...", format: :spin)
     spinner.auto_spin
     start
@@ -42,6 +43,8 @@ class App
     filename = "./dist/index.js"
     current_time = Time.now.strftime("%Y-%m-%d %H:%M:%S")
     js_header = [
+      "/* name: #{@pkg["name"]}*/",
+      "/* version: #{@pkg["version"]}*/",
       "/* Update time: #{current_time}*/",
       "/* Update By: abcft.wfe team */",
     ].join "\n"
